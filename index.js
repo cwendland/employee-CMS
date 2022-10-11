@@ -1,8 +1,11 @@
 const { default: inquirer } = require("inquirer");
+const {getEmployees, addEmployee, updateEmployee} = require('./lib/employee');
+const {addDepartment, getDepartments} = require('./lib/department');
+const {getPositions, addPosition} = require('./lib/position');
 var loop = true;
 
 
-while(quit) {
+while(loop) {
     inquirer
       .prompt([
         {
@@ -43,3 +46,5 @@ while(quit) {
         }
       })
 }
+
+console.log('Successfully exited.');
