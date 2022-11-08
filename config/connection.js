@@ -9,6 +9,9 @@ const db = mysql.createConnection(
         database: process.env.DB_NAME
     },
     console.log('Connected to the employees_db database')
+    
 );
+
+
 
 module.exports = db;
