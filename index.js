@@ -1,8 +1,5 @@
 const inquirer = require("inquirer");
 const connection = require('./config/connection');
-const {addEmployee, getEmployees, updateEmployeePosition, deleteEmployee} = require('./lib/employee');
-const {addDepartment, getDepartments} = require('./lib/department');
-const {addPosition, getPositions} = require('./lib/position');
 
 connection.connect(function(err) {
     if (err) throw err;
@@ -67,7 +64,7 @@ const addDepartment = () => {
         type: "input", 
         message: "Please enter the name for the department.",
             validate: (input) => {
-        if (!input) {return "Error❗ Please enter valid department name❗";}
+        if (!input) {return "Error, invalid name";}
         return true;
         },
     })
@@ -76,7 +73,7 @@ const addDepartment = () => {
         {name: response.newDepartment},
             (err, res) => {
                 if (err) throw err;
-                console.log(`Success ✅ ${response.newDepartment} department added successfully ✅.`);
+                console.log(`Success, added ${response.newDepartment} department.`);
         employeeView();
         });
     });
@@ -169,11 +166,6 @@ const addEmployee = () => {
         name: "positionId", 
         type: "input", 
         message: "Please enter position ID.",
-        validate: (input) => {
-            if (input=/^\d+$/) {
-                return true;
-            } else {return "Error, enter a valid position ID";}  
-        },
     }
 ])
     .then(response => {
@@ -202,7 +194,7 @@ const getEmployees = () => {
                     d.name,
                     r.salary,
                     e.manager_id
-                    FROM employee e
+                    FROM employees e
                     INNER JOIN positions r 
                     ON e.position_id = r.id
                     INNER JOIN departments d

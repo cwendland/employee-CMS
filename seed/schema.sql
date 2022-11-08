@@ -20,7 +20,8 @@ CREATE TABLE positions (
 
 CREATE TABLE employees (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(30) NOT NULL,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
     position_id INT NOT NULL,
     manager_id INT REFERENCES employees(id),
     FOREIGN KEY (position_id) 
